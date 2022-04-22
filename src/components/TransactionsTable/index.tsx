@@ -1,9 +1,12 @@
 import { useTransactions } from '../../context/TransactionsContext/hooks/useTransactions';
+import { useDeleteTransaction } from '../../context/DeleteTransactionContext/hooks/useDeleteTransaction';
+import { FiTrash } from 'react-icons/fi';
 
 import { Container } from './styles';
 
 export function TransactionsTable() {
   const { transactions } = useTransactions();
+  const { handleOpenDeleteTransactionModal } = useDeleteTransaction();
 
   return (
     <Container>
@@ -14,6 +17,7 @@ export function TransactionsTable() {
             <th>Valor</th>
             <th>Categoria</th>
             <th>Data</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -32,6 +36,11 @@ export function TransactionsTable() {
                 {new Intl.DateTimeFormat('pt-BR').format(
                   new Date(transaction.createdAt),
                 )}
+              </td>
+              <td>
+                <button onClick={() => handleOpenDeleteTransactionModal(transaction)}>
+                  <FiTrash />
+                </button>
               </td>
             </tr>
           ))}
