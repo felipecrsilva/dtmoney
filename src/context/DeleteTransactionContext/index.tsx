@@ -22,11 +22,10 @@ function DeleteTransactionProvider({ children }: DeleteTransactionProviderProps)
   );
 
   async function deleteTransaction() {
-    await api.delete(`transactions/${selectedTransaction?.id}`);
-
     const filteredTransactions = transactions.filter(transaction => transaction.id !== selectedTransaction?.id);
     
-    setTransactions(filteredTransactions)
+    localStorage.setItem('@dtmoney:transactions', JSON.stringify(filteredTransactions));
+    setTransactions(filteredTransactions);
   }
 
   function handleOpenDeleteTransactionModal(transaction: Transaction) {

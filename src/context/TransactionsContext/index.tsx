@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { api } from '../../services/api';
 
@@ -14,19 +15,25 @@ const TransactionsContext = createContext<TransactionsContextData>(
 );
 
 function TransactionsProvider({ children }: TransactionsProviderProps) {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>(() => {
+    const storagedTransactions = localStorage.getItem('@dtmoney:transactions');
 
-  useEffect(() => {
-    api
-      .get('transactions')
-      .then(response => setTransactions(response.data.transactions));
-  }, []);
+    if (storagedTransactions) {
+      return JSON.parse(storagedTransactions);
+    }
+
+    return [];
+  });
 
   async function createTransaction(transactionInput: TransactionInput) {
-    const response = await api.post('transactions', transactionInput);
-    const { transaction } = response.data;
+    const transaction = {
+      id: uuid(),
+      ...transactionInput,
+      createdAt: String(new Date())
+    }
 
-    setTransactions([...transactions, transaction]);
+    localStorage.setItem('@dtmoney:transactions', JSON.stringify([ ...transactions, transaction ]));
+    setTransactions([ ...transactions, transaction ]);
   }
 
   return (
