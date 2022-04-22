@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, Dispatch } from 'react';
 
 interface Transaction {
   id: string;
@@ -18,6 +18,7 @@ interface TransactionsProviderProps {
 interface TransactionsContextData {
   transactions: Transaction[];
   createTransaction(transaction: TransactionInput): Promise<void>;
+  setTransactions: Dispatch<React.SetStateAction<Transaction[]>>;
 }
 
 export type {

@@ -30,7 +30,7 @@ function TransactionsProvider({ children }: TransactionsProviderProps) {
   }
 
   return (
-    <TransactionsContext.Provider value={{ transactions, createTransaction }}>
+    <TransactionsContext.Provider value={{ transactions, setTransactions, createTransaction }}>
       {children}
     </TransactionsContext.Provider>
   );

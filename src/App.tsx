@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
 import { AppContextProvider } from './context';
 import { NewTransactionModal } from './components/NewTransactionModal';
+import { DeleteTransactionModal } from './components/DeleteTransactionModal';
 
 import { GlobalStyle } from './styles/global';
 
@@ -31,6 +32,7 @@ export function App() {
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
       />
+      <DeleteTransactionModal />
       <GlobalStyle />
     </AppContextProvider>
   );
