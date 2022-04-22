@@ -16,7 +16,7 @@ const TransactionsContext = createContext<TransactionsContextData>(
 
 function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>(() => {
-    const storagedTransactions = localStorage.getItem('@dtmoney:transactions')
+    const storagedTransactions = localStorage.getItem('@dtmoney:transactions');
 
     if (storagedTransactions) {
       return JSON.parse(storagedTransactions);
@@ -32,7 +32,7 @@ function TransactionsProvider({ children }: TransactionsProviderProps) {
       createdAt: String(new Date())
     }
 
-    localStorage.setItem('@dtmoney:transactions', JSON.stringify([ ...transactions, transaction ]))
+    localStorage.setItem('@dtmoney:transactions', JSON.stringify([ ...transactions, transaction ]));
     setTransactions([ ...transactions, transaction ]);
   }
 

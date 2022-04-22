@@ -24,8 +24,8 @@ function DeleteTransactionProvider({ children }: DeleteTransactionProviderProps)
   async function deleteTransaction() {
     const filteredTransactions = transactions.filter(transaction => transaction.id !== selectedTransaction?.id);
     
-    localStorage.setItem('@dtmoney:transactions', JSON.stringify(filteredTransactions))
-    setTransactions(filteredTransactions)
+    localStorage.setItem('@dtmoney:transactions', JSON.stringify(filteredTransactions));
+    setTransactions(filteredTransactions);
   }
 
   function handleOpenDeleteTransactionModal(transaction: Transaction) {
